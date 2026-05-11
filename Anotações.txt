@@ -1,3 +1,25 @@
 git add .
 git commit -m "V1"
 git push origin main
+
+Comandos para executar
+Com um MP3:
+python main.py process sua_musica.mp3 --language pt --tempo 120
+A conversão MP3 → WAV é automática. O pipeline inteiro em 1 comando.
+Outros comandos:
+python main.py process arquivo.ogg              # OGG
+python main.py process arquivo.wav              # WAV
+python main.py capture --duration 30            # gravar do sistema
+python main.py full --duration 60               # gravar + processar
+python main.py serve                            # API em http://localhost:8000
+python main.py diagnose                         # diagnosticar
+Testes:
+python -m pytest tests/ -v -k "not slow"        # sem modelos ML (13 tests)
+python -m pytest tests/ -v -m slow              # com modelos ML
+O que falta (próximos passos sugeridos)
+O que	Por que
+Instalar faster-whisper e basic-pitch	Para o pipeline completo funcionar (transcrição + MIDI)
+Interface web (HTML/JS)	Para visualizar o karaokê com letra sincronizada
+Player de karaokê	Reproduzir áudio + destacar palavras no tempo
+Exportar para KRC/LRC	Formatos padrão de karaokê
+Suporte a YouTube	Baixar áudio diretamente de URL

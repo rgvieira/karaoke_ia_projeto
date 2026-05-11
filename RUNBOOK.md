@@ -8,8 +8,11 @@ Guia passo a passo para executar o Karaokê IA em diferentes cenários.
 - [Instalação](#instalação)
 - [Diagnóstico do Sistema](#diagnóstico-do-sistema)
 - [Pipeline Completo](#pipeline-completo)
+- [YouTube](#youtube)
 - [Captura de Áudio](#captura-de-áudio)
 - [Processamento Offline](#processamento-offline)
+- [Exportação LRC/TXT](#exportação-lrctxt)
+- [Interface Web](#interface-web)
 - [Servidor API](#servidor-api)
 - [Testes](#testes)
 - [Solução de Problemas](#solução-de-problemas)
@@ -110,6 +113,38 @@ python main.py full --duration 60 --language en --tempo 140
 
 ---
 
+## YouTube
+
+### Baixar e processar audio do YouTube
+
+```bash
+python main.py youtube "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+```
+
+Isso baixa o audio, converte para WAV e executa o pipeline completo.
+
+### Parametros
+
+| Parametro | Default | Descricao |
+|-----------|---------|-----------|
+| `url` | (obrigatorio) | URL do video do YouTube |
+| `--language, -l` | pt | Idioma para transcricao Whisper |
+| `--tempo, -t` | 120 | BPM para quantizacao MIDI |
+
+### Exemplo com parametros
+
+```bash
+python main.py youtube "https://youtu.be/abc123" --language en --tempo 140
+```
+
+### Requisitos
+
+```bash
+pip install yt-dlp
+```
+
+---
+
 ## Captura de Áudio
 
 ### Gravar áudio do sistema
@@ -126,10 +161,17 @@ Se o loopback WASAPI falhar, o sistema automaticamente usa o microfone com redu�
 
 ## Processamento Offline
 
-### Processar WAV existente
+### Processar arquivo de audio (WAV/MP3/OGG/FLAC)
 
 ```bash
 python main.py process caminho/para/audio.wav --language pt --tempo 120
+```
+
+MP3, OGG e FLAC sao convertidos automaticamente para WAV:
+
+```bash
+python main.py process caminho/para/musica.mp3 --language pt --tempo 120
+python main.py process caminho/para/audio.ogg --language en --tempo 140
 ```
 
 ### Arquivos gerados
@@ -156,6 +198,54 @@ python main.py process caminho/para/audio.wav --language pt --tempo 120
   Duração : 30.0s
   Saída   : output/outputs/projeto_karaoke.json
 ```
+
+---
+
+## Exportacao LRC/TXT
+
+### Exportar projeto para formato LRC (letra sincronizada)
+
+```bash
+python main.py export output/outputs/projeto_karaoke.json --format lrc
+```
+
+Isso gera `projeto_karaoke.lrc` no mesmo diretorio.
+
+### Opcoes
+
+| Parametro | Default | Descricao |
+|-----------|---------|-----------|
+| `project` | (obrigatorio) | Caminho do JSON do projeto |
+| `--format, -f` | lrc | Formato de saida: `lrc` ou `txt` |
+| `--output, -o` | (auto) | Caminho do arquivo de saida |
+
+### Exemplos
+
+```bash
+python main.py export projeto.json -f lrc -o musica.lrc
+python main.py export projeto.json -f txt
+```
+
+---
+
+## Interface Web
+
+### Iniciar servidor com player de karaoke
+
+```bash
+python main.py serve
+```
+
+Acesse: http://127.0.0.1:8000/api/web
+
+### Funcionalidades do player
+
+- Upload de arquivo de audio (WAV/MP3/OGG)
+- Download de audio do YouTube por URL
+- Letra sincronizada com destaque palavra-a-palavra
+- Barra de meta (BPM, tom, duracao)
+- Piano roll simplificado
+- Exportacao LRC e JSON diretamente da界面
 
 ---
 
