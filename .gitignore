@@ -1,0 +1,69 @@
+# ─── Python ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+*.so
+
+# ─── Ambiente Virtual ─────────────────────────────────────────────────
+.venv/
+venv/
+env/
+.conda/
+ENV/
+
+# ─── IDE / Editor ─────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+
+# ─── Projeto ──── ─────────────────────────────────────────────────────
+output/outputs/
+!output/__init__.py
+!output/.gitkeep
+
+# ─── Modelos / Dados ──────────────────────────────────────────────────
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.onnx
+*.pkl
+*.joblib
+~faster-whisper/
+
+# ─── Logs ─────────────────────────────────────────────────────────────
+*.log
+*.log.*
+
+# ─── Ambiente ─────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.crt
+
+# ─── Testes ───────────────────────────────────────────────────────────
+.htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+.pytest_cache/
+
+# ─── Docker ───────────────────────────────────────────────────────────
+.docker/
+docker-compose.override.yml
+
+# ─── Windows ──────────────────────────────────────────────────────────
+desktop.ini

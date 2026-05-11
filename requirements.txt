@@ -1,0 +1,27 @@
+# ─── Core Pipeline ────────────────────────────────────────────────────────────
+faster-whisper>=1.0.0        # transcrição de áudio (Whisper otimizado)
+basic-pitch>=0.3.0           # áudio → MIDI (Spotify)
+pretty_midi>=0.2.10          # manipulação e escrita de MIDI
+librosa>=0.10.0              # análise de áudio e detecção de tonalidade
+mido>=1.3.0                  # leitura/escrita MIDI (fallback)
+
+# ─── Captura de Áudio ─────────────────────────────────────────────────────────
+pyaudio>=0.2.14              # captura WASAPI loopback (Windows)
+sounddevice>=0.4.6           # alternativa a pyaudio
+noisereduce>=3.0.0           # redução de ruído (fallback microfone)
+
+# ─── Backend / API ────────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9      # upload de arquivos via FastAPI
+
+# ─── Deep Learning ────────────────────────────────────────────────────────────
+torch>=2.2.0                 # detecção de GPU
+tensorflow>=2.15.0           # runtime BasicPitch
+numpy>=1.24.0
+scipy>=1.11.0                # fallback de resampling
+
+# ─── Testes ───────────────────────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+httpx>=0.27.0                # testes de API FastAPI
